@@ -1,12 +1,17 @@
 package co.com.springbootconmongo.UseCase;
 
-import co.com.springbootconmongo.DTOs.RecursoDTO;
+import co.com.springbootconmongo.Collections.Recurso;
 import co.com.springbootconmongo.Mappers.RecursoMapper;
 import co.com.springbootconmongo.Repositories.RecursoRepository;
 import co.com.springbootconmongo.UseCase.Interfaces.DevolverRecurso;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
+
+@Service
+@Validated
 public class UseCaseDevolverRecurso implements DevolverRecurso {
 
     private final RecursoRepository repository;
@@ -19,16 +24,17 @@ public class UseCaseDevolverRecurso implements DevolverRecurso {
     }
 
     @Override
-    public Mono<String> devolverRecurso(RecursoDTO dto) {
-        return repository.findById(dto.getId())
-                .map(recurso -> {
-                    if (!recurso.isDisponible()){
-                        recurso.setFechaPrestamo(null);
-                        recurso.setDisponible(true);
-                        repository.save(recurso);
-                        return "Recurso devuelto con éxito";
-                    }
-                    return "El recurso no ha sido prestado";
-                });
+    public Mono<String> devolverRecurso(String id) {
+        Mono<Recurso> elemento = repository.findById(id);
+         return elemento.flatMap( elemento1 -> {
+             if (elemento1.isDisponible() == false){
+                 elemento1.setFechaPrestamo(null);
+                 elemento1.setDisponible(true);
+                 repository.save(elemento1);
+                 return Mono.just("Recurso devuelto con éxito");
+             }
+             return Mono.just("El recurso no ha sido prestado");
+         }) ;
     }
+
 }

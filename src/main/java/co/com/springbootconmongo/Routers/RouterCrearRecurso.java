@@ -21,7 +21,7 @@ public class RouterCrearRecurso {
                 request -> request.bodyToMono(RecursoDTO.class)
                         .flatMap(recursoDTO -> useCaseCrearRecurso.apply(recursoDTO)
                                 .flatMap(result -> ServerResponse.ok()
-                                        .contentType(MediaType.TEXT_PLAIN)
+                                        .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))));
     }
 

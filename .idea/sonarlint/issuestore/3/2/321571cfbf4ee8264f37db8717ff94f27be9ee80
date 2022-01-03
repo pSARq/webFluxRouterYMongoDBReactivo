@@ -1,0 +1,6 @@
+
+=
+java:S1125"'Remove the unnecessary boolean literal.(ý©–î
+E
+java:S1068"*Remove this unused "mapper" private field.(×«êàþÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(“üÏ£

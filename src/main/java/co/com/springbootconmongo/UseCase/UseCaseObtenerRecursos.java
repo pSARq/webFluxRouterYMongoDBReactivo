@@ -4,10 +4,14 @@ import co.com.springbootconmongo.DTOs.RecursoDTO;
 import co.com.springbootconmongo.Mappers.RecursoMapper;
 import co.com.springbootconmongo.Repositories.RecursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
 import java.util.function.Supplier;
 
+@Service
+@Validated
 public class UseCaseObtenerRecursos implements Supplier<Flux<RecursoDTO>> {
 
     private final RecursoRepository repository;

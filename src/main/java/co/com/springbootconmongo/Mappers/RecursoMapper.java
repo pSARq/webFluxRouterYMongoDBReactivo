@@ -2,12 +2,14 @@ package co.com.springbootconmongo.Mappers;
 
 import co.com.springbootconmongo.DTOs.RecursoDTO;
 import co.com.springbootconmongo.Collections.Recurso;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
+@Component
 public class RecursoMapper {
 
     public Function<RecursoDTO, Recurso> fromDTO(){
@@ -18,7 +20,7 @@ public class RecursoMapper {
             recurso.setTipo(dto.getTipo());
             recurso.setTematica(dto.getTematica());
             recurso.setDisponible(dto.isDisponible());
-            recurso.setFechaPrestamo(recurso.getFechaPrestamo());
+            recurso.setFechaPrestamo(dto.getFechaPrestamo());
             return recurso;
         };
     }

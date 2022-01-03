@@ -5,10 +5,14 @@ import co.com.springbootconmongo.Mappers.RecursoMapper;
 import co.com.springbootconmongo.Repositories.RecursoRepository;
 import co.com.springbootconmongo.UseCase.Interfaces.ConsultarPorTipo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
 import java.util.Collections;
 
+@Service
+@Validated
 public class UseCaseConsultarPorTipo implements ConsultarPorTipo {
 
     private final RecursoRepository repository;

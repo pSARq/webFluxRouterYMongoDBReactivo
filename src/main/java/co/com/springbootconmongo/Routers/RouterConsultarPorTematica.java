@@ -6,6 +6,7 @@ import co.com.springbootconmongo.UseCase.UseCaseConsultarPorTematica;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
@@ -22,6 +23,6 @@ public class RouterConsultarPorTematica {
                 GET("/tematica/{tematica}").and(accept(MediaType.APPLICATION_JSON)),
                 request ->ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(useCaseConsultarPorTematica.findByTematica(request.pathVariable("tematica")), RecursoDTO.class));
+                        .body(BodyInserters.fromPublisher(useCaseConsultarPorTematica.findByTematica(request.pathVariable("tematica")), RecursoDTO.class)));
     }
 }
